@@ -11,6 +11,8 @@ let s:cpo_save=&cpo
 set cpo&vim
 " }}}
 
+command! -nargs=0  -bang -bar EVSnippetsCacheClear call evplg#snippets#baselib#init#uninit_lazy( <bang>0 )
+
 " restore old "compatibility" options {{{
 let &cpo=s:cpo_save
 unlet s:cpo_save
