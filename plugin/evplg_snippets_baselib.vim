@@ -13,6 +13,11 @@ set cpo&vim
 
 command! -nargs=0  -bang -bar EVSnippetsCacheClear call evplg#snippets#baselib#init#uninit_lazy( <bang>0 )
 
+" NOTE: defined here to use a function in an 'autoload'-ed module to avoid
+" loading that module until the command is executed.
+command! -nargs=* -bang -bar EVSnippetsCacheAutoClear
+			\	call evplg#snippets#baselib#integ#cacheautoclear#cmdhelper_addfilespecs( <bang>0, <f-args> )
+
 function! s:local_snippetdirs_getsuffixes()
 	let l:plugin_snipmate_loaded = ( exists( ':SnipMateLoadScope' ) == 2 )
 	let l:plugin_ultisnips_loaded = ( exists( ':UltiSnipsEdit' ) == 2 )

@@ -73,6 +73,12 @@ function! evplg#snippets#baselib#integ#cacheautoclear#clearfilespecs()
 	augroup END
 endfunction
 
+" NOTE: command-invoked function renamed so that it can be invoked from a 'plugin/*.vim' file
+" prev: function! s:cmd_addfilespecs( clear_prev_flag, ... )
+function! evplg#snippets#baselib#integ#cacheautoclear#cmdhelper_addfilespecs( clear_prev_flag, ... )
+	call evplg#snippets#baselib#integ#cacheautoclear#addfilespecs( a:000, a:clear_prev_flag )
+endfunction
+
 " restore old "compatibility" options {{{
 let &cpo=s:cpo_save
 unlet s:cpo_save
