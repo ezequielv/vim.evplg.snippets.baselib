@@ -18,6 +18,8 @@ let s:escape_seq_dict = {
 " TODO: MAYBE: create evplg#snippets#baselib#valcommon#init_lazy()
 "  TODO: MAYBE: call: function! evplg#snippets#baselib#init#init_lazy() from this init functon
 
+" MAYBE: also create others functions, which are more abstract: evplg#snippets#baselib#valcommon#getabstract('nl') ([n]ew [l]ine)
+
 function! evplg#snippets#baselib#valcommon#getesc( id )
 	" for now, we propagate errors (exceptions)
 	return s:escape_seq_dict[ a:id ]
