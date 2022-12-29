@@ -106,7 +106,7 @@ function! evplg#snippets#baselib#init#init_lazy()
 						" echomsg 'DEBUG: about to run runtime! ' . l:runtime_specs_now
 						execute 'runtime! ' . l:runtime_specs_now
 					catch
-						echomsg 'ERROR: lazy_init(): caught exception sourcing script. exception=' . string( v:exception ) . '; location=' . stirng( v:throwpoint )
+						echomsg 'ERROR: lazy_init(): caught exception sourcing script. exception=' . string( v:exception ) . '; location=' . string( v:throwpoint )
 					finally
 						" flag the "scope" as having been dealt with, even when
 						" there was an error, so we avoid re-'runtime'-ing buggy
