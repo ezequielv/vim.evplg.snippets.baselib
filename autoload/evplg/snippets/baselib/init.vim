@@ -105,10 +105,6 @@ function! evplg#snippets#baselib#init#init_lazy()
 								\		' '
 								\	)
 					try
-						" prev: " flag that this is done before actually doing it, so we cope
-						" prev: " with bad scripts/errors by not re-'runtime'-ing them
-						" prev: " repeteadly.
-						" prev: let l:scope_procdict[ 'done_runtime' ] = !0
 						" echomsg 'DEBUG: about to run runtime! ' . l:runtime_specs_now
 						execute 'runtime! ' . l:runtime_specs_now
 					catch
