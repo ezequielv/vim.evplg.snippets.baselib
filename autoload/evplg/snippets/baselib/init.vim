@@ -86,8 +86,8 @@ function! evplg#snippets#baselib#init#init_lazy()
 				let l:scope_procdict = s:local_procdict_getentryforscope( l:scope_now )
 				if ( ! get( l:scope_procdict, 'done_runtime', 0 ) )
 					" do a 'runtime' on the appropriately named files:
-					"  (something like: runtime! evplg/snippets/scopes/SCOPE{[-_]*,}.vim)
-					" prev: \ 'evlib#compat#fnameescape( printf(''%s%s%s.vim'', l:runtime_spec_pref, l:scope_now, v:val ) )'
+					"  (something like: runtime! evplg/snippets/scopes/SCOPE{[-_]*,/*,}.vim)
+					"
 					" NOTE: no need to use 'evlib#compat#fnameescape()' on
 					" some of the components (no including the ones containing
 					" wildcards, as those would be unnecessarily (and wrongly)
@@ -98,6 +98,7 @@ function! evplg#snippets#baselib#init#init_lazy()
 								\				[
 								\					'',
 								\					'[-_]*',
+								\					'/*',
 								\				],
 								\				'printf(''%s%s%s.vim'', l:runtime_spec_pref, l:scope_now, v:val )'
 								\			),
