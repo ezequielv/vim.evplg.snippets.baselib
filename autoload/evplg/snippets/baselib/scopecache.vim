@@ -100,7 +100,7 @@ function! evplg#snippets#baselib#scopecache#set_default_value( key, defvalue )
 	if evplg#snippets#baselib#scopecache#has_cached_key( a:key )
 		return 0
 	endif
-	call evplg#snippets#baselib#scopecache#set_default_value( a:key, a:defvalue )
+	call evplg#snippets#baselib#scopecache#set_cached_value( a:key, a:defvalue )
 	return !0
 endfunction
 
