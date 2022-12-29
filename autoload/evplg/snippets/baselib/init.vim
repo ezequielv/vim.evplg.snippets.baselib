@@ -88,6 +88,11 @@ function! evplg#snippets#baselib#init#init_lazy()
 					" do a 'runtime' on the appropriately named files:
 					"  (something like: runtime! evplg/snippets/scopes/SCOPE{[-_]*,}.vim)
 					" prev: \ 'evlib#compat#fnameescape( printf(''%s%s%s.vim'', l:runtime_spec_pref, l:scope_now, v:val ) )'
+					" NOTE: no need to use 'evlib#compat#fnameescape()' on
+					" some of the components (no including the ones containing
+					" wildcards, as those would be unnecessarily (and wrongly)
+					" escaped, too), as we know that each of those components
+					" does not need escaping.
 					let l:runtime_specs_now = join(
 								\		map(
 								\				[
