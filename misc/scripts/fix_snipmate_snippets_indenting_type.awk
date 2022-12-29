@@ -127,6 +127,29 @@ function f_finish_last_src_file(			l_rc, l_success, l_src_basename, l_out_filena
 
 	r_line_fmtflag_snippetheader = ( r_line ~ /^snippet[ \t]/ )
 	r_line_fmtflag_snippetcontents = ( r_line ~ /^[ \t]/ )
+	# FIXME: support both empty lines and lines consisting only of whitespace as "potentially being part of a snippet contents":
+	#  NOTE: both snipmate and ultisnips seem to support blank lines (even without any whitespace in them) as part of "snippet contents" if a proper "snippet contents" line follows:
+	#   snippet some_snippet_...
+	#   {tab}snippet_line_1
+	#   {tab}snippet_line_2
+	#   {blank_line}		<- this is part of the "snippet contents"
+	#   {tab}snippet_line_3
+	#   {blank_line}		<- this is *not* part of the "snippet contents"
+	#   snippet another_snippet_...
+	#
+	#  IDEA: store the lines contents for those "maybe snippet contents" lines, or just how many of them there were (as only blank lines would fall into this category, I think),
+	#   and process them when a certain state change happens:
+	#    * -> "state_line_other": add them as they were (or just blank lines)
+	#    * -> "state_snippet_content": add them as "\t" lines, so that both
+	#          parsers take them properly (avoiding these "edge cases",
+	#          making them more parser-friendly), and also (and more
+	#          importantly) allowing the following lines to also being
+	#          taken into consideration for re-indenting/validation, etc.
+	#   NOTE: consider that the script can no longer blindly add lines to 'g_src_lineproc_lines' (near bottom of this script), but rather has to keep those "maybe content" lines in another array, or just conditionally update 'g_src_lineproc_lines' when 'g_src_lineproc_maybesnippcontents_nlines_last' is != 0 at that point (as it could have been set to zero after manually processing those "maybe content" lines before reaching that point).
+	#   MAYBE: r_line_fmtflag_maybesnippcontents_blank = ( r_line ~ /^$/ )
+	#           # MAYBE: (or just done below when determinig next state?): # ... && ( g_src_lineproc_state == "state_snippet_header" || g_src_lineproc_state == "state_snippet_content" )
+	#   MAYBE: # initialisation # g_src_lineproc_maybesnippcontents_nlines_last = 0
+
 	f_debug( sprintf( "   fmtflags: snippetheader=%d; snippetcontents=%d;", r_line_fmtflag_snippetheader, r_line_fmtflag_snippetcontents ) )
 }
 
