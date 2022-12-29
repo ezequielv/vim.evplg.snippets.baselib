@@ -12,7 +12,10 @@ set cpo&vim
 " }}}
 
 let s:escape_seq_dict = {
+			\	'\': "\\",
 			\	'n': "\n",
+			\	't': "\t",
+			\	'r': "\r",
 			\ }
 
 " TODO: MAYBE: create evplg#snippets#baselib#valcommon#init_lazy()
